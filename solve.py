@@ -4,6 +4,7 @@
 
 import sys
 from pprint import pprint
+from qcpboard import QcpBoard
 
 def read_input_board(casename):
     input_file = open("data/" + casename)
@@ -34,18 +35,22 @@ def read_input_board(casename):
     return board
 
 
-read_input_board('d-15-01.txt.txt')
+matrix = read_input_board('d-10-01.txt.txt')
+board = QcpBoard(matrix)
+board.set_variable_domains_all()
+board._print_variable_domain_map()
 
-def solveSimpleBackTracking(self):
-    location = self.getNextLocation()
-    if location is empty:
-        return True
-    else:
-        self.expandedNodes += 1
-        for choice in range(1,self.dim+1):
-            if self.isSafe(location[0],location[1],choice):  #location[0] is x, location[1] is y
-                self.board[location[0]][location[1]] = str(choice)
-                if self.solveSimpleBackTracking():
-                    return True
-                self.board[location[0]][location[1]] = ‘0’  #resetting choice 
-    return False
+
+# def solveSimpleBackTracking(self):
+#     location = self.getNextLocation()
+#     if location is empty:
+#         return True
+#     else:
+#         self.expandedNodes += 1
+#         for choice in range(1,self.dim+1):
+#             if self.isSafe(location[0],location[1],choice):  #location[0] is x, location[1] is y
+#                 self.board[location[0]][location[1]] = str(choice)
+#                 if self.solveSimpleBackTracking():
+#                     return True
+#                 self.board[location[0]][location[1]] = ‘0’  #resetting choice 
+#     return False
