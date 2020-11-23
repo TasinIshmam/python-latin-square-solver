@@ -40,6 +40,7 @@ board = QcpBoard(matrix)
 board.set_variable_domains_all()
 board._print_variable_domain_map()
 
+print(board.find_variable_with_smallest_domain())
 
 # def solveSimpleBackTracking(self):
 #     location = self.getNextLocation()

@@ -19,13 +19,26 @@ class QcpBoard:
         for pair in self.variable_domain_map.items():
             print(pair) 
 
+    def find_variable_with_smallest_domain(self):
+        min_entry = (-1,-1)
+        min_domain_size = self.board_len + 1
+
+        for key, domain in self.variable_domain_map.items():
+            if domain == [-1]:
+                continue 
+
+            if (len(domain) < min_domain_size): # found variable with smaller domain. 
+                min_domain_size = len(domain)
+                min_entry = key 
+
+        return min_entry, self.variable_domain_map[min_entry] 
+
     def find_domain_for_variable(self, row,  col) -> list: 
         if not (0 <= row < self.board_len) or not (0 <= col < self.board_len) :
             raise Exception("Invalid row or col values. Row: " + str(row) + "Col: " + str(col))
 
         if self.board[row][col] != 0: # Value already set. So no point in calculating domain. 
             return [-1] #[-1] used to indicate board entry already assigned in variable domain map. 
-
 
         domain_set = set([idx for idx in range(1, self.board_len + 1)])
 
@@ -43,7 +56,7 @@ class QcpBoard:
             if self.board[idx][col] in domain_set:
                 domain_set.remove(self.board[idx][col])
         
-        # whatever is left in domain_set is the domain of the (x,y) on the board. 
+        # whatever is left in domain_set is the domain of (x,y) on the board. 
         return list(domain_set)
 
 
