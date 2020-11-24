@@ -56,8 +56,9 @@ random: A random (unassigned or uninstantiated) variable is chosen.
 IBS: Impact-Based Heuristic. Selects the variable having the largest impact and the value having the smallest impact.
 
 
-
-
+dyanmic degree = row and column kotogula faka ase 
+static degree = 2 * (n - 1)  (basically koto gula variables are associated with me)
+ 
 As performance measures:
 * number of consistency checking  == Number of nodes expanded. 
 *  number of fails  == Number of times you had to backtrack (because a constraint failed)

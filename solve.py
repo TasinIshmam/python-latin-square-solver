@@ -34,13 +34,14 @@ def read_input_board(casename):
     pprint(board)
     return board
 
-
-matrix = read_input_board('d-10-01.txt.txt')
-board = QcpBoard(matrix)
-board.set_variable_domains_all()
-board._print_variable_domain_map()
-
-print(board.find_variable_with_smallest_domain())
+input_files = ['d-10-01.txt.txt', 'd-10-06.txt.txt', 'd-10-07.txt.txt', 'd-10-08.txt.txt', 'd-10-09.txt.txt']
+input_files_2 = ['d-15-01.txt.txt']
+for file_name in input_files:
+    print(file_name)
+    matrix = read_input_board(file_name)
+    board = QcpBoard(matrix)
+    board.solveSimpleBackTracking()
+    board.print_state()
 
 # def solveSimpleBackTracking(self):
 #     location = self.getNextLocation()
