@@ -61,7 +61,7 @@ static degree = 2 * (n - 1)  (basically koto gula variables are associated with 
  
 As performance measures:
 * number of consistency checking  == Number of nodes expanded. 
-*  number of fails  == Number of times you had to backtrack (because a constraint failed)
+* number of fails  == Number of times you had to backtrack (because a constraint failed)
 
 
 

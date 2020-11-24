@@ -31,12 +31,12 @@ def read_input_board(casename):
 
         board.append(number_arr)
     
-    pprint(board)
+    # pprint(board)
     return board
 
 input_files = ['d-10-01.txt.txt', 'd-10-06.txt.txt', 'd-10-07.txt.txt', 'd-10-08.txt.txt', 'd-10-09.txt.txt']
 input_files_2 = ['d-15-01.txt.txt']
-for file_name in input_files:
+for file_name in input_files_2:
     print(file_name)
     matrix = read_input_board(file_name)
     board = QcpBoard(matrix)

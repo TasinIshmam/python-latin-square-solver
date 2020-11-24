@@ -1,0 +1,90 @@
+Smallest Domain
+
+d-10-01.txt.txt
+Expanded Nodes:  228
+Backtracks Done:  171
+
+
+d-10-06.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0
+
+
+d-10-07.txt.txt
+Expanded Nodes:  574
+Backtracks Done:  517
+
+
+d-10-08.txt.txt
+Expanded Nodes:  300
+Backtracks Done:  243
+
+
+d-10-09.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0
+
+d-15-01.txt.txt
+Expanded Nodes:  1828284
+Backtracks Done:  1828178
+
+First - Second
+
+d-10-01.txt.txt
+Expanded Nodes:  113
+Backtracks Done:  56
+
+
+d-10-06.txt.txt
+Expanded Nodes:  460
+Backtracks Done:  403
+
+
+d-10-07.txt.txt
+Expanded Nodes:  167
+Backtracks Done:  110
+
+
+d-10-08.txt.txt
+Expanded Nodes:  68
+Backtracks Done:  11
+
+
+d-10-09.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0
+
+d-15-01.txt.txt
+Expanded Nodes:  263819
+Backtracks Done:  263713
+
+Second - First
+
+d-10-01.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0
+
+
+d-10-06.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0
+
+
+d-10-07.txt.txt
+Expanded Nodes:  376
+Backtracks Done:  319
+
+
+d-10-08.txt.txt
+Expanded Nodes:  81
+Backtracks Done:  24
+
+
+d-10-09.txt.txt
+Expanded Nodes:  5590
+Backtracks Done:  5533
+
+
+d-15-01.txt.txt
+Expanded Nodes:  418422
+Backtracks Done:  418316
