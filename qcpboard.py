@@ -25,7 +25,6 @@ class QcpBoard:
                 self.variable_domain_map[(row,col)] = self.find_domain_for_variable(row, col)
 
 
-
     def set_variable_domains_for_specific_row_col(self, row: int, col: int) -> None:
         # across row
         for idx in range(0, self.board_len):
@@ -34,6 +33,7 @@ class QcpBoard:
         # across col
         for idx in range(0, self.board_len):
             self.variable_domain_map[(idx,col)] = self.find_domain_for_variable(idx,col)
+
 
     def find_variable_with_smallest_domain_heuristic(self) -> Optional[tuple]:
         min_entry = (-1,-1)
@@ -80,6 +80,7 @@ class QcpBoard:
         # note: domain set can be empty [] if there's no options 
         return list(domain_set)  
 
+
     def find_dynamic_degre_for_variable(self, row, col):
         dynamic_degree = 0
         #iterate across single row
@@ -93,10 +94,12 @@ class QcpBoard:
 
         return dynamic_degree
     
+
     def set_dynamic_degree_all(self):
         for row in range (self.board_len):
             for col in range (self.board_len):
                 self.variable_dynamic_degree_map[(row,col)] = self.find_dynamic_degre_for_variable(row, col)
+
 
     def set_dynamic_degree_specific_row_col(self, row, col):
         # across row
@@ -107,6 +110,7 @@ class QcpBoard:
         for idx in range(0, self.board_len):
             self.variable_dynamic_degree_map[(idx,col)] = self.find_dynamic_degre_for_variable(idx,col)
                 
+
     def find_variable_with_brelaz_heuristic(self):
         # brelaz sorts by domain length, and then breaks ties with maximum dynamic degree. 
         variable_list = []
@@ -123,6 +127,7 @@ class QcpBoard:
 
         return variable_list[0][0], variable_list[0][1] # return (row,col) , [domain_list]
 
+
     @staticmethod
     def brelaz_comparator (first, second):
         if len(first[1]) == len (second[1]):
@@ -131,7 +136,6 @@ class QcpBoard:
             return len(first[1]) - len(second[1])
 
             
-
     def set_variable_in_board(self, row: int, col: int, value: int):
         if not (0 <= row < self.board_len) or not (0 <= col < self.board_len) :
             raise Exception("Invalid row or col values. Row: " + str(row) + "Col: " + str(col))
@@ -156,7 +160,6 @@ class QcpBoard:
         self.set_dynamic_degree_specific_row_col(row, col)
 
 
-
     def is_complete(self) -> bool:
         for row in range(0, self.board_len):
             for col in range(0, self.board_len):
@@ -170,6 +173,7 @@ class QcpBoard:
         for pair in self.variable_domain_map.items():
             print(pair) 
 
+
     def print_state(self):
         # print("\n-----------Original Board State------------")
         # pprint(self.original_board)
@@ -180,7 +184,6 @@ class QcpBoard:
         print("Expanded Nodes: ", self.expanded_nodes)
         print("Backtracks Done: ", self.backtracks_done)
         print("\n")
-
 
 
     def solveSimpleBackTracking(self):
@@ -217,7 +220,9 @@ class QcpBoard:
         self.expanded_nodes = 0
         self.backtracks_done = 0
         self.variable_domain_map = {}  
+        self.variable_dynamic_degree_map = {}
         self.set_variable_domains_all()  
+        self.set_dynamic_degree_all() 
            
 
 
