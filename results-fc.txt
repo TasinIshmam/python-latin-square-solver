@@ -1,0 +1,52 @@
+Brelaz
+
+d-10-01.txt.txt
+Expanded Nodes:  109
+Backtracks Done:  52
+
+
+d-10-06.txt.txt
+Expanded Nodes:  419
+Backtracks Done:  362
+
+
+d-10-07.txt.txt
+Expanded Nodes:  151
+Backtracks Done:  94
+
+
+d-10-08.txt.txt
+Expanded Nodes:  64
+Backtracks Done:  7
+
+
+d-10-09.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0
+
+
+Smalest Domain
+
+d-10-01.txt.txt
+Expanded Nodes:  213
+Backtracks Done:  156
+
+
+d-10-06.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0
+
+
+d-10-07.txt.txt
+Expanded Nodes:  537
+Backtracks Done:  480
+
+
+d-10-08.txt.txt
+Expanded Nodes:  278
+Backtracks Done:  221
+
+
+d-10-09.txt.txt
+Expanded Nodes:  57
+Backtracks Done:  0

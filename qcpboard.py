@@ -186,7 +186,7 @@ class QcpBoard:
         print("\n")
 
 
-    def solveSimpleBackTracking(self):
+    def solve_backtracking(self):
         if self.is_complete():
             return True
         
@@ -206,7 +206,7 @@ class QcpBoard:
                 raise Exception("Invalid domain marker [-1] added to domain map")
 
             self.set_variable_in_board(min_entry[0], min_entry[1], domain_choice)
-            if self.solveSimpleBackTracking():
+            if self.solve_backtracking():
                 return True
             else: #not sure if this should be here. 
                 self.reset_variable_in_board(min_entry[0], min_entry[1])  #resetting domain_choice 
@@ -214,6 +214,63 @@ class QcpBoard:
 
         return False
 
+    
+    def solve_forward_checking(self):
+        if self.is_complete():
+            return True
+        
+        min_entry, domain = self.find_variable_with_smallest_domain_heuristic()
+        
+        if min_entry is None:
+            raise Exception("No domain entries found even though board is not complete.")
+
+        self.expanded_nodes += 1
+
+        if self.expanded_nodes % 10000 == 0:
+            self.print_state()
+
+        # random.shuffle(domain)
+        for domain_choice in domain:
+            if domain_choice == [-1]:
+                raise Exception("Invalid domain marker [-1] added to domain map")
+            
+            if self.check_if_move_creates_empty_domain_conflict(min_entry[0], min_entry[1], domain_choice):
+                continue 
+
+            self.set_variable_in_board(min_entry[0], min_entry[1], domain_choice)
+            if self.solve_forward_checking():
+                return True
+            else: #not sure if this should be here. 
+                self.reset_variable_in_board(min_entry[0], min_entry[1])  #resetting domain_choice 
+                self.backtracks_done += 1  # resetting a variable basically means going back/backtracking. 
+
+        return False
+
+    
+    def check_if_move_creates_empty_domain_conflict(self, row, col, variable_choice):
+        """ If a variable is assigned to a cell, make sure it will not cause empty domain set for another variable.
+
+        Eg: For example, imagine that there are two cells v1 and v2 in a row with domains d1=[1,2] and d2=[1].
+        Our location function chooses the v1. In the normal case the program chooses 1 first, the new value of d2
+        would be d2=[] as a result and in the deeper layer it finds out that there are no possible values for the 
+        cell with domain d2 and it backtracks. This function will check if such a situation occurs. 
+        """
+        
+        #iterate across single row
+        for idx in range(self.board_len):
+            if idx != col and self.board[row][idx] == 0:
+                domain_set = self.variable_domain_map[(row, idx)]
+                if len(domain_set) == 1 and domain_set[0] == variable_choice:
+                    return True  #empty domain conflict created. 
+
+        #iterate across single column
+        for idx in range(self.board_len):
+            if idx != row and self.board[idx][col] == 0:
+                domain_set = self.variable_domain_map[(idx, col)]
+                if len(domain_set) == 1 and domain_set[0] == variable_choice:
+                    return True  # empty domain conflict created. 
+        
+        return False 
             
     def reset_board(self) -> None:    # Sets board to original state. 
         self.board = deepcopy(self.original_board)

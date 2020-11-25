@@ -40,7 +40,7 @@ for file_name in input_files_2:
     print(file_name)
     matrix = read_input_board(file_name)
     board = QcpBoard(matrix)
-    board.solveSimpleBackTracking()
+    board.solve_forward_checking()
     board.print_state()
 
 # def solveSimpleBackTracking(self):
