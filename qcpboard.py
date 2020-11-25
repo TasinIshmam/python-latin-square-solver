@@ -3,6 +3,7 @@ from pprint import pprint
 import random 
 from copy import deepcopy
 import functools
+from config import Config
 
 
 class QcpBoard: 
@@ -190,7 +191,12 @@ class QcpBoard:
         if self.is_complete():
             return True
         
-        min_entry, domain = self.find_variable_with_brelaz_heuristic()
+        if Config.variable_ordering == Config.variable_ordering_choices[0]:
+            min_entry, domain = self.find_variable_with_brelaz_heuristic()
+        elif Config.variable_ordering == Config.variable_ordering_choices[1]:
+            min_entry, domain = self.find_variable_with_smallest_domain_heuristic()
+        else:
+            raise Exception("Error. No valid variable ordering heuristic specified.")
         
         if min_entry is None:
             raise Exception("No domain entries found even though board is not complete.")
@@ -219,14 +225,20 @@ class QcpBoard:
         if self.is_complete():
             return True
         
-        min_entry, domain = self.find_variable_with_smallest_domain_heuristic()
+        if Config.variable_ordering == Config.variable_ordering_choices[0]:
+            min_entry, domain = self.find_variable_with_brelaz_heuristic()
+        elif Config.variable_ordering == Config.variable_ordering_choices[1]:
+            min_entry, domain = self.find_variable_with_smallest_domain_heuristic()
+        else:
+            raise Exception("Error. No valid variable ordering heuristic specified.")
+
         
         if min_entry is None:
             raise Exception("No domain entries found even though board is not complete.")
 
         self.expanded_nodes += 1
 
-        if self.expanded_nodes % 10000 == 0:
+        if self.expanded_nodes % 50000 == 0:
             self.print_state()
 
         # random.shuffle(domain)
