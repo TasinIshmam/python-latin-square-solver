@@ -25,6 +25,11 @@ Expanded Nodes:  57
 Backtracks Done:  0
 
 
+d-15-01.txt.txt
+Expanded Nodes:  235153
+Backtracks Done:  235047
+
+
 Smalest Domain
 
 d-10-01.txt.txt
@@ -50,3 +55,6 @@ Backtracks Done:  221
 d-10-09.txt.txt
 Expanded Nodes:  57
 Backtracks Done:  0
+
+Expanded Nodes:  1624082
+Backtracks Done:  1623976

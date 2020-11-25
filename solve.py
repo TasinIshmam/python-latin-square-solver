@@ -1,6 +1,4 @@
 #!/usr/bin/python3 
-# Useful link: https://levelup.gitconnected.com/csp-algorithm-vs-backtracking-sudoku-304a242f96d0
-
 
 import sys
 from pprint import pprint
@@ -10,7 +8,7 @@ def read_input_board(casename):
     input_file = open("data/" + casename)
 
     if input_file is None:
-        raise Exception("File not found: " + casename)
+        raise Exception("File not found: data/" + casename)
 
     input_lines = input_file.read().splitlines()
 
@@ -36,23 +34,10 @@ def read_input_board(casename):
 
 input_files = ['d-10-01.txt.txt', 'd-10-06.txt.txt', 'd-10-07.txt.txt', 'd-10-08.txt.txt', 'd-10-09.txt.txt']
 input_files_2 = ['d-15-01.txt.txt']
-for file_name in input_files_2:
+for file_name in input_files:
     print(file_name)
     matrix = read_input_board(file_name)
     board = QcpBoard(matrix)
     board.solve_forward_checking()
     board.print_state()
 
-# def solveSimpleBackTracking(self):
-#     location = self.getNextLocation()
-#     if location is empty:
-#         return True
-#     else:
-#         self.expandedNodes += 1
-#         for choice in range(1,self.dim+1):
-#             if self.isSafe(location[0],location[1],choice):  #location[0] is x, location[1] is y
-#                 self.board[location[0]][location[1]] = str(choice)
-#                 if self.solveSimpleBackTracking():
-#                     return True
-#                 self.board[location[0]][location[1]] = ‘0’  #resetting choice 
-#     return False

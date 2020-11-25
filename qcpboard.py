@@ -175,12 +175,12 @@ class QcpBoard:
 
 
     def print_state(self):
-        # print("\n-----------Original Board State------------")
-        # pprint(self.original_board)
-        # print("-----------Original Board State------------\n")
-        # print("-----------Current Board State------------")
-        # pprint(self.board)
-        # print("-----------Current Board State------------\n")
+        print("\n-----------Original Board State------------")
+        pprint(self.original_board)
+        print("-----------Original Board State------------\n")
+        print("-----------Current Board State------------")
+        pprint(self.board)
+        print("-----------Current Board State------------\n")
         print("Expanded Nodes: ", self.expanded_nodes)
         print("Backtracks Done: ", self.backtracks_done)
         print("\n")
@@ -190,14 +190,14 @@ class QcpBoard:
         if self.is_complete():
             return True
         
-        min_entry, domain = self.find_variable_with_smallest_domain_heuristic()
+        min_entry, domain = self.find_variable_with_brelaz_heuristic()
         
         if min_entry is None:
             raise Exception("No domain entries found even though board is not complete.")
 
         self.expanded_nodes += 1
 
-        if self.expanded_nodes % 10000 == 0:
+        if self.expanded_nodes % 50000 == 0:
             self.print_state()
 
         # random.shuffle(domain)
