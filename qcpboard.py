@@ -110,7 +110,43 @@ class QcpBoard:
         # across col
         for idx in range(0, self.board_len):
             self.variable_dynamic_degree_map[(idx,col)] = self.find_dynamic_degre_for_variable(idx,col)
-                
+
+
+    def find_variable_with_min_dynamic_degree_heuristic(self) -> Optional[tuple]:
+        min_entry = (-1,-1)
+        min_dynamic_degree = self.board_len + 1
+
+        for key, dynamic_degree in self.variable_dynamic_degree_map.items():
+            if self.board[key[0]][key[1]] != 0:  # skip entries that are already filled up. 
+                continue 
+
+            if (dynamic_degree < min_dynamic_degree): # found variable with smaller domain. 
+                min_dynamic_degree = dynamic_degree
+                min_entry = key 
+
+        if min_entry == (-1,-1): # No entries to add. 
+            return None, None
+
+        return min_entry, self.variable_domain_map[min_entry]
+
+
+    def find_variable_with_max_dynamic_degree_heuristic(self) -> Optional[tuple]:
+        max_entry = (-1,-1)
+        max_dynamic_degree = 0
+
+        for key, dynamic_degree in self.variable_dynamic_degree_map.items():
+            if self.board[key[0]][key[1]] != 0:  # skip entries that are already filled up. 
+                continue 
+
+            if (dynamic_degree > max_dynamic_degree): # found variable with larger domain. 
+                max_dynamic_degree = dynamic_degree
+                max_entry = key 
+
+        if max_entry == (-1,-1): # No entries to add. 
+            return None, None
+
+        return max_entry, self.variable_domain_map[max_entry]
+        
 
     def find_variable_with_brelaz_heuristic(self):
         # brelaz sorts by domain length, and then breaks ties with maximum dynamic degree. 
@@ -195,6 +231,10 @@ class QcpBoard:
             min_entry, domain = self.find_variable_with_brelaz_heuristic()
         elif Config.variable_ordering == Config.variable_ordering_choices[1]:
             min_entry, domain = self.find_variable_with_smallest_domain_heuristic()
+        elif Config.variable_ordering == Config.variable_ordering_choices[2]:
+            min_entry, domain = self.find_variable_with_max_dynamic_degree_heuristic()
+        elif Config.variable_ordering == Config.variable_ordering_choices[3]:
+            min_entry, domain = self.find_variable_with_min_dynamic_degree_heuristic() 
         else:
             raise Exception("Error. No valid variable ordering heuristic specified.")
         
@@ -229,6 +269,10 @@ class QcpBoard:
             min_entry, domain = self.find_variable_with_brelaz_heuristic()
         elif Config.variable_ordering == Config.variable_ordering_choices[1]:
             min_entry, domain = self.find_variable_with_smallest_domain_heuristic()
+        elif Config.variable_ordering == Config.variable_ordering_choices[2]:
+            min_entry, domain = self.find_variable_with_max_dynamic_degree_heuristic()
+        elif Config.variable_ordering == Config.variable_ordering_choices[3]:
+            min_entry, domain = self.find_variable_with_min_dynamic_degree_heuristic() 
         else:
             raise Exception("Error. No valid variable ordering heuristic specified.")
 
