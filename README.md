@@ -11,7 +11,7 @@ A latin square of size m, is a mxm multiplication table in which each element oc
 This program takes an incomplete latin square and solves it using Constraint Satisfaction and Backtracking. Look into *instructions* folder for more information about the problem. 
 
 * Algorithims used: Backtracking, Forward Checking 
-* Variable Ordering Heuristics Used: Smallest Domain, Brelaz. 
+* Variable Ordering Heuristics Used: Smallest Domain, Brelaz, Minimum Dynamic Degree
 
 ### How to use
 

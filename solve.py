@@ -49,12 +49,17 @@ for file_name in input_files_all:
     print(file_name)
     matrix = read_input_board(file_name)
     board = QcpBoard(matrix)
+    success = False 
 
     if Config.algorithm == Config.algorithm_choices[1]:
-        board.solve_forward_checking()
+        success = board.solve_forward_checking()
     elif Config.algorithm == Config.algorithm_choices[0]:
-        board.solve_backtracking() 
+        success = board.solve_backtracking() 
     else:
         raise Exception("No valid algorithm specified")
+    
+    if not success:
+        print("Failed to solve latin square")
+        
     board.print_state()
 
